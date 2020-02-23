@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { UserView } from './UserView'
+import UserView from './UserView'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks';
 

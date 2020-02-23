@@ -16,6 +16,6 @@ export default gql`
     extend type Mutation {
         createUser(firstName: String!, lastName: String!, email: String!): User
         deleteUser(id: ID!): Boolean
-        updateUser(id: ID!, firstName: String, lastName: String, email: String): User
+        editUser(id: ID!, firstName: String, lastName: String, email: String): User
     }
 `

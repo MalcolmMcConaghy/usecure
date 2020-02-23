@@ -2,21 +2,28 @@
   "users": [
     {
       "firstName": "Test",
-      "lastName": "User",
+      "lastName": "Test",
       "email": "test@test.com",
-      "id": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
+      "id": "9ef8b13a-3d36-4844-8331-39254312df1b"
+    },
+    {
+      "firstName": "Ayayas",
+      "lastName": "McConaghy",
+      "email": "mcconaghym@live.co.uk",
+      "id": "6dbbfaef-1ba9-4d3b-8cfc-8a2a280f9302"
+    },
+    {
+      "firstName": "Test",
+      "lastName": "Test",
+      "email": "test@test.com",
+      "id": "0f9ac597-f6ef-4d87-b468-523db3dd05e5"
     }
   ],
   "courseResults": [
     {
-      "name": "Test Course",
-      "score": 100,
-      "learnerId": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
-    },
-    {
-      "name": "Test Course 2",
-      "score": 50,
-      "learnerId": "bc3e02fa-8a5e-4c1c-b78a-9dad0505876f"
+      "name": "Test Course 3",
+      "score": "66",
+      "learnerId": "9ef8b13a-3d36-4844-8331-39254312df1b"
     }
   ]
 }

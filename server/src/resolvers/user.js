@@ -3,6 +3,7 @@ export default {
     firstName: async (parent, args, context, info) => parent.firstName,
     lastName: async (parent, args, context, info) => parent.lastName,
     email: async (parent, args, context, info) => parent.email,
+    id: async (parent, args, context, info) => parent.id,
     courseResults: async (parent, args, { db }, info) => {
       return db.get('courseResults').filter({ learnerId: parent.id }).value()
     }
@@ -16,16 +17,21 @@ export default {
     }
   },
   Mutation: {
-    createUser: async (parent, { lastName, email }, { db }, info) => {
+    createUser: async (parent, { firstName, lastName, email }, { db }, info) => {
       const newUser = db.get('users').insert({ firstName, lastName, email }).write()
 
       return { ...newUser }
     },
-    deleteUser: async (parent, { userId }, { db }, info) => {
-      // ToDo: Delete user
+    deleteUser: async (parent, { id }, { db }, info) => {
+      db.get('courseResults').remove({ learnerId: id}).write()
+      db.get('users').remove({ id: id }).write()
+
+      return true
     },
-    updateUser: async (parent, { id, firstName, lastName, email }, { db }, info) => {
-      // ToDo: Update user
+    editUser: async (parent, { id, firstName, lastName, email }, { db }, info) => {
+      const updatedUser = db.get('users').find({ id }).assign({ firstName, lastName, email}).write()
+
+      return { ...updatedUser }
     }
   }
 }
