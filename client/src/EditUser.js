@@ -1,4 +1,4 @@
-import React, {useRef, Fragment, useEffect} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { gql } from 'apollo-boost'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
@@ -34,16 +34,21 @@ const EditUser = ({id, listRefetch}) => {
     variables: { id }
   })
   const [editUser] = useMutation(EDIT_USER)
-  let firstName = useRef(null);
-  let lastName = useRef(null);
-  let email = useRef(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() =>  {
     if (id) {
-      console.log(id)
       refetch()
     }
-  }, [id])
+
+    if (data) {
+      setFirstName(data.user.firstName)
+      setLastName(data.user.lastName)
+      setEmail(data.user.email)
+    }
+  }, [id, data, refetch])
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error!</p>
@@ -54,16 +59,13 @@ const EditUser = ({id, listRefetch}) => {
     <Fragment>
       <form onSubmit={e => {
         e.preventDefault()
-        editUser({ variables: { id, firstName: firstName.current.value, lastName: lastName.current.value, email: email.current.value } })
-        firstName.current.value = ''
-        lastName.current.value = ''
-        email.current.value = ''
+        editUser({ variables: { id, firstName: firstName, lastName: lastName, email: email } })
         listRefetch()
         refetch()
       }}>
-        <input ref={firstName} defaultValue={data.user.firstName} placeholder='First Name'/>
-        <input ref={lastName} defaultValue={data.user.lastName} placeholder='Last Name'/>
-        <input ref={email} defaultValue={data.user.email} placeholder='Email' type='email'/>
+        <input value={firstName} onChange={e => setFirstName(e.target.value)} placeholder='First Name' type='text' />
+        <input value={lastName} onChange={e => setLastName(e.target.value)} placeholder='Last Name' type='text' />
+        <input value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' type='email'/>
         <button className="button button--update" type="submit">Update User</button>
       </form>
     </Fragment>

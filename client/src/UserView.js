@@ -37,8 +37,11 @@ const UserView = () => {
   const [deleteUser] = useMutation(DELETE_USER)
 
   const deleteUserClick = id => {
-    deleteUser({ variables: { id } })
-    refetch()
+    const confirmDeletion = window.confirm('Are you sure want to delete this user?')
+    if (confirmDeletion) {
+      deleteUser({ variables: { id } })
+      refetch()
+    }
   }
 
   const editUserClick = id => {
